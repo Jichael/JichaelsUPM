@@ -1,0 +1,71 @@
+{
+    "name": "PolygonExempleAction",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "ea3bafb2-b587-4bf9-b567-0c26f7ca588b",
+            "actions": [
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "24972589-df9b-4943-b595-b086bb004220",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GetSnapShot",
+                    "type": "Button",
+                    "id": "cad1817c-052d-4ba2-8100-a543516045ea",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "ClearSnapShot",
+                    "type": "Button",
+                    "id": "65fd05ac-61ae-49f8-8a40-27769757ea44",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9e24cdc5-e6a8-4dc6-b154-24816c2f17f7",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4243993f-582f-4548-a62d-3ce2bd8b3707",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetSnapShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "536ccf05-b50a-43e7-aa4d-d5ddf5d2d96d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClearSnapShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
