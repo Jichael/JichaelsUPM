@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/CustomPackages/JichaelsVR/Runtime/Player/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/CustomPackages/JichaelsVR/Samples/Player/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
@@ -169,6 +169,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""579eea5d-ee19-4cf7-8586-10ea3c7f5104"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -545,6 +553,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""OpenModuleSelector"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""653bd7b5-43a0-4123-a345-ddf942202daf"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -651,6 +670,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_JVRPlayer_Sprint = m_JVRPlayer.FindAction("Sprint", throwIfNotFound: true);
         m_JVRPlayer_ResetTrackingSpace = m_JVRPlayer.FindAction("ResetTrackingSpace", throwIfNotFound: true);
         m_JVRPlayer_OpenModuleSelector = m_JVRPlayer.FindAction("OpenModuleSelector", throwIfNotFound: true);
+        m_JVRPlayer_MousePosition = m_JVRPlayer.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -719,6 +739,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_JVRPlayer_Sprint;
     private readonly InputAction m_JVRPlayer_ResetTrackingSpace;
     private readonly InputAction m_JVRPlayer_OpenModuleSelector;
+    private readonly InputAction m_JVRPlayer_MousePosition;
     public struct JVRPlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -742,6 +763,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_JVRPlayer_Sprint;
         public InputAction @ResetTrackingSpace => m_Wrapper.m_JVRPlayer_ResetTrackingSpace;
         public InputAction @OpenModuleSelector => m_Wrapper.m_JVRPlayer_OpenModuleSelector;
+        public InputAction @MousePosition => m_Wrapper.m_JVRPlayer_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_JVRPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -808,6 +830,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenModuleSelector.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
                 @OpenModuleSelector.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
                 @OpenModuleSelector.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
+                @MousePosition.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_JVRPlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -869,6 +894,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenModuleSelector.started += instance.OnOpenModuleSelector;
                 @OpenModuleSelector.performed += instance.OnOpenModuleSelector;
                 @OpenModuleSelector.canceled += instance.OnOpenModuleSelector;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -921,5 +949,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnResetTrackingSpace(InputAction.CallbackContext context);
         void OnOpenModuleSelector(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

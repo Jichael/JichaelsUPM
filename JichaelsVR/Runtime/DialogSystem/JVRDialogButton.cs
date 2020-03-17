@@ -16,6 +16,9 @@ namespace Jichaels.VRSDK
         [SerializeField] private GameObject content;
         [SerializeField] private TextMeshProUGUI contentText;
 
+        [SerializeField] private CursorType cursorType;
+        
+
         public JVRDialogAnswerSO DialogAnswerSo { get; private set; }
 
         private Color _initialColor;
@@ -94,7 +97,7 @@ namespace Jichaels.VRSDK
             HoverExit();
         }
 
-        public CursorType HoverCursor { get; set; }
+        public CursorType HoverCursor => cursorType;
 
         #endregion
 

@@ -112,8 +112,6 @@ namespace Jichaels.VRSDK
             _characterController.height = Rules.PlayerHeight;
 
             _playerInput = GetComponent<PlayerInput>();
-            
-            
 
             LeftHandController.InitializeController(this);
             RightHandController.InitializeController(this);

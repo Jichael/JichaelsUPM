@@ -43,7 +43,7 @@ namespace Jichaels.VRSDK
         {
             _mousePosition = mousePositionAction.action.ReadValue<Vector2>();
             
-            _ray = Player.HeadSet.Camera.ViewportPointToRay(_mousePosition);
+            _ray = Player.HeadSet.Camera.ScreenPointToRay(_mousePosition);
             if (Physics.Raycast(_ray, out _hit, Rules.MouseActionMaxDistance, layerMask))
             {
                 IJVRMouseInteract jvrMouseInteract = _hit.collider.GetComponent<IJVRMouseInteract>();
@@ -51,27 +51,27 @@ namespace Jichaels.VRSDK
                 if (jvrMouseInteract == _jvrMouseInteract)
                 {
                     if(_isHovering) _jvrMouseInteract.MouseHoverStay(this);
-                    return;
-                }
-
-                if (_isHovering)
-                {
-                    _jvrMouseInteract.MouseHoverExit(this);
-                }
-                
-                _jvrMouseInteract = jvrMouseInteract;
-
-                if (_jvrMouseInteract != null)
-                {
-                    _isHovering = true;
-                    _jvrMouseInteract.MouseHoverEnter(this);
-                    
-                    if(CursorManager.Exist) CursorManager.Instance.SetCursor(_jvrMouseInteract.HoverCursor);
                 }
                 else
                 {
-                    _isHovering = false;
-                    if(CursorManager.Exist) CursorManager.Instance.ResetDefaultCursor();
+                    if (_isHovering)
+                    {
+                        _jvrMouseInteract.MouseHoverExit(this);
+                    }
+                
+                    _jvrMouseInteract = jvrMouseInteract;
+
+                    if (_jvrMouseInteract != null)
+                    {
+                        _isHovering = true;
+                        _jvrMouseInteract.MouseHoverEnter(this);
+                        CursorManager.Instance.SetCursor(_jvrMouseInteract.HoverCursor);
+                    }
+                    else
+                    {
+                        _isHovering = false;
+                        CursorManager.Instance.ResetDefaultCursor();
+                    }
                 }
             }
             else
@@ -80,11 +80,12 @@ namespace Jichaels.VRSDK
                 {
                     _jvrMouseInteract.MouseHoverExit(this);
                     _jvrMouseInteract = null;
-                    if(CursorManager.Exist) CursorManager.Instance.ResetDefaultCursor();
+                    CursorManager.Instance.ResetDefaultCursor();
                 }
                 _isHovering = false;
             }
 
+            CursorManager.Instance.SetCursorPosition(_mousePosition);
         }
 
         public void PrimaryAction()

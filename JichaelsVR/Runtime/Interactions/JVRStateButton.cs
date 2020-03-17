@@ -19,6 +19,9 @@ namespace Jichaels.VRSDK
 
         [SerializeField] private float springEffectMultiplier = 0.5f;
         [SerializeField] private float clickDelay = 0.2f;
+
+        [SerializeField] private CursorType cursorType;
+        
         
         public bool Pressed { get; private set; }
         public event Action<JVRStateButton, bool> OnStateChange;
@@ -121,7 +124,7 @@ namespace Jichaels.VRSDK
         public void MouseHoverStay(JVRMouseController mouseController) { }
 
         public void MouseHoverExit(JVRMouseController mouseController) { }
-        public CursorType HoverCursor { get; set; }
+        public CursorType HoverCursor => cursorType;
 
         #endregion
 

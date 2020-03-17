@@ -6,6 +6,7 @@ namespace Jichaels.VRSDK
     public class JVRSittingPoint : MonoBehaviour, IJVRLaserInteract, IJVRMouseInteract
     {
 
+        [SerializeField] private CursorType cursorType;
         private Vector3 _initialPosition;
 
         public void Action(JVRPlayer player)
@@ -85,7 +86,7 @@ namespace Jichaels.VRSDK
 
         }
 
-        public CursorType HoverCursor { get; set; }
+        public CursorType HoverCursor => cursorType;
 
         #endregion
 

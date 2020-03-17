@@ -66,8 +66,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headSet: {fileID: 7161900012279866103}
-  leftController: {fileID: 7683021955152197965}
-  rightController: {fileID: 7864921255952576563}
+  leftHandController: {fileID: 7683021955152197965}
+  rightHandController: {fileID: 7864921255952576563}
   mouseController: {fileID: 4896227970346637098}
   inputActionMovement: {fileID: 8416240525526526895, guid: 6d3003f9cde850945b1d37700399178b,
     type: 3}
@@ -75,7 +75,7 @@ MonoBehaviour:
     type: 3}
   initialScheme: 1
   allowMouseKeyboard: 1
-  allowGamepad: 1
+  allowGamepad: 0
   allowVR: 1
   allowVRMovement: 1
   allowVRRotation: 1
@@ -373,9 +373,25 @@ MonoBehaviour:
     m_ActionId: 065f1e65-a3c5-45c0-8595-6f00d143a6a1
     m_ActionName: JVRPlayer/ResetTrackingSpace
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8505159585693978985}
+        m_TargetAssemblyTypeName: Jichaels.VRSDK.JVRPlayer, Jichaels.VRSDK
+        m_MethodName: OnOpenModuleSelector
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: cc40a091-ef16-4d6e-a355-6bad9d13b8a5
     m_ActionName: JVRPlayer/OpenModuleSelector
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 579eea5d-ee19-4cf7-8586-10ea3c7f5104
+    m_ActionName: JVRPlayer/MousePosition[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: MouseKeyboard
   m_DefaultActionMap: JVRPlayer
@@ -393,6 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311cc16a62b5de64585426df24d94051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePositionAction: {fileID: 3518843013661237934, guid: 6d3003f9cde850945b1d37700399178b,
+    type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -793,6 +811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678044416582014227, guid: 0ea7a94c91534ac47b4d7e45c4c2effc,
+        type: 3}
+      propertyPath: createModuleOnInit
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3557860594986500935, guid: 0ea7a94c91534ac47b4d7e45c4c2effc,
         type: 3}

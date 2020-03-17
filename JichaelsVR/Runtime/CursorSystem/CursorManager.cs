@@ -5,7 +5,6 @@ namespace Jichaels.VRSDK
     public class CursorManager : MonoBehaviour
     {
         public static CursorManager Instance { get; private set; }
-        public static bool Exist { get; private set; }
         
         public bool IsLocked { get; private set; }
 
@@ -21,10 +20,9 @@ namespace Jichaels.VRSDK
         private void Awake()
         {
             Instance = this;
-            Exist = true;
 
             Cursor.visible = false;
-
+            SetLockState(false);
             IsLocked = Cursor.lockState == CursorLockMode.Locked;
 
             _currentCursor = defaultCursor;

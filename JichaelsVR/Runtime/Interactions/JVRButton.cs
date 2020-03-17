@@ -1,8 +1,12 @@
+using UnityEngine;
+
 namespace Jichaels.VRSDK
 {
     public class JVRButton : JVRClickableButton, IJVRMouseInteract, IJVRLaserInteract
     {
 
+        [SerializeField] private CursorType cursorType;
+        
         #region IJVRMouseInteract
 
         public void PrimaryInteraction(JVRMouseController mouseController)
@@ -30,7 +34,7 @@ namespace Jichaels.VRSDK
 
         }
 
-        public CursorType HoverCursor { get; set; }
+        public CursorType HoverCursor => cursorType;
 
         #endregion
 

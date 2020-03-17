@@ -156,6 +156,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "579eea5d-ee19-4cf7-8586-10ea3c7f5104",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -530,6 +538,17 @@
                     "processors": "",
                     "groups": "VR",
                     "action": "OpenModuleSelector",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "653bd7b5-43a0-4123-a345-ddf942202daf",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

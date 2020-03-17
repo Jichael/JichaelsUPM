@@ -10,6 +10,6 @@ namespace Jichaels.VRSDK
 
         void MouseHoverExit(JVRMouseController mouseController);
 
-        CursorType HoverCursor { get; set; }
+        CursorType HoverCursor { get; }
     }
 }
