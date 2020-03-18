@@ -12,8 +12,8 @@ namespace Jichaels.VRSDK
         [SerializeField] private CursorBase zoomCursor;
         [SerializeField] private CursorBase handCursor;
         [SerializeField] private CursorBase informationCursor;
-        
-        public bool ShowHint { get; set; }
+
+        public bool ShowHint { get; set; } = true;
 
         private CursorBase _currentCursor;
 
@@ -40,24 +40,36 @@ namespace Jichaels.VRSDK
             _currentCursor.SetClickState(clickState);
         }
 
-        public void SetCursor(CursorType cursorType, string hintText = null)
+        public void SetCursor(CursorInfo cursorInfo)
+        {
+            SetCursor(cursorInfo.CursorType, cursorInfo.CursorHint);
+        }
+
+        private void SetCursor(CursorType cursorType, string cursorHint)
         {
             _currentCursor.HideCursor();
             _currentCursor = CursorTypeToCursor(cursorType);
-            if (string.Equals(hintText, null))
+            if (string.IsNullOrEmpty(cursorHint))
             {
                 _currentCursor.HideHint();
             }
             else
             {
-                if(ShowHint) _currentCursor.ShowHint(hintText);
+                if (ShowHint)
+                {
+                    _currentCursor.ShowHint(cursorHint);
+                }
+                else
+                {
+                    _currentCursor.HideHint();
+                }
             }
             _currentCursor.ShowCursor();
         }
 
         public void ResetDefaultCursor()
         {
-            SetCursor(CursorType.Default);
+            SetCursor(CursorType.Default, null);
         }
 
         public void SetLockState(bool isLocked)
@@ -94,5 +106,13 @@ namespace Jichaels.VRSDK
         Zoom,
         Hand,
         Information // TODO : more cursor
+    }
+
+    [Serializable]
+    public class CursorInfo
+    {
+        public CursorType CursorType;
+        public string CursorHint;
+        public bool TranslatedHint;
     }
 }

@@ -473,7 +473,6 @@ namespace Jichaels.VRSDK
         private void SetVRSettings()
         {
             //XRGeneralSettings.Instance.Manager.StartSubsystems();
-            //if (CursorManager.Instance != null) CursorManager.Instance.SetCursorLockState(false);
         }
 
         private void SetNonVRSettings()
@@ -482,8 +481,6 @@ namespace Jichaels.VRSDK
             _currentLocalRotationEulers.x = 0;
             _currentLocalRotationEulers.y = 0;
             _currentLocalRotationEulers.z = 0;
-            
-            // if(CursorManager.Instance != null) CursorManager.Instance.SetCursorLockState(true);
         }
 
 
@@ -564,7 +561,9 @@ namespace Jichaels.VRSDK
         public void OnActionPrimary(InputAction.CallbackContext ctx)
         {
             if (!ctx.performed) return;
-            if(Mathf.Approximately(ctx.ReadValue<float>(), 1)) MouseController.PrimaryAction();
+            bool clickState = Mathf.Approximately(ctx.ReadValue<float>(), 1);
+            CursorManager.Instance.SetClickState(clickState);
+            if(clickState) MouseController.PrimaryAction();
         }
 
         public void OnActionSecondary(InputAction.CallbackContext ctx)

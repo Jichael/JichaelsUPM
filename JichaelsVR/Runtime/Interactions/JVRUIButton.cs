@@ -10,7 +10,7 @@ namespace Jichaels.VRSDK
 
         [SerializeField] private Button button;
 
-        [SerializeField] private CursorType cursorType;
+        [SerializeField] private CursorInfo cursorInfo;
         
 
 #if UNITY_EDITOR
@@ -89,7 +89,7 @@ namespace Jichaels.VRSDK
 
         }
 
-        public CursorType HoverCursor => cursorType;
+        public CursorInfo HoverCursor => cursorInfo;
 
         #endregion
 

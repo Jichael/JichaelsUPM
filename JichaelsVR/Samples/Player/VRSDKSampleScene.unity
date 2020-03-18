@@ -620,7 +620,9 @@ MonoBehaviour:
   unpressPosition: {x: -0.053, y: -0.1332, z: -0.0372}
   springEffectMultiplier: 0.5
   clickDelay: 0.2
-  cursorType: 2
+  cursorInfo:
+    CursorType: 2
+    CursorHint: Push
 --- !u!4 &526421708
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,7 +2095,9 @@ MonoBehaviour:
   unpressPosition: {x: -0.0161, y: -0.1332, z: -0.0372}
   springEffectMultiplier: 0.5
   clickDelay: 0.2
-  cursorType: 2
+  cursorInfo:
+    CursorType: 2
+    CursorHint: Danger
 --- !u!1 &2104097121
 GameObject:
   m_ObjectHideFlags: 0

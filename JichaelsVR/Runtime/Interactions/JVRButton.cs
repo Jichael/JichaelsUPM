@@ -5,7 +5,7 @@ namespace Jichaels.VRSDK
     public class JVRButton : JVRClickableButton, IJVRMouseInteract, IJVRLaserInteract
     {
 
-        [SerializeField] private CursorType cursorType;
+        [SerializeField] private CursorInfo cursorInfo;
         
         #region IJVRMouseInteract
 
@@ -34,7 +34,7 @@ namespace Jichaels.VRSDK
 
         }
 
-        public CursorType HoverCursor => cursorType;
+        public CursorInfo HoverCursor => cursorInfo;
 
         #endregion
 

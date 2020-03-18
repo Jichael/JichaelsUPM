@@ -16,7 +16,7 @@ namespace Jichaels.VRSDK
         [SerializeField] private GameObject content;
         [SerializeField] private TextMeshProUGUI contentText;
 
-        [SerializeField] private CursorType cursorType;
+        [SerializeField] private CursorInfo cursorInfo;
         
 
         public JVRDialogAnswerSO DialogAnswerSo { get; private set; }
@@ -97,7 +97,7 @@ namespace Jichaels.VRSDK
             HoverExit();
         }
 
-        public CursorType HoverCursor => cursorType;
+        public CursorInfo HoverCursor => cursorInfo;
 
         #endregion
 

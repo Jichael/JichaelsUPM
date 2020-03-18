@@ -23,9 +23,9 @@
       "path": "Samples~/PoolingExample"
     },
     {
-      "displayName": "SceneLoader Example",
-      "description": "Simple scene loader canvas",
-      "path": "Samples~/SceneLoaderExample"
+      "displayName": "Managers Hierarchy",
+      "description": "Hierarchy of the different managers, the ones that are not in Jichaels.Core needs to be added the corresponding scripts",
+      "path": "Samples~/ManagersHierarchy"
     }
   ]
 }
