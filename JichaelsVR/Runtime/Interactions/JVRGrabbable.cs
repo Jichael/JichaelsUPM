@@ -1,6 +1,4 @@
-﻿#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Jichaels.VRSDK
@@ -21,9 +19,7 @@ namespace Jichaels.VRSDK
 
         [SerializeField] private bool canBeSnapped;
 
-#if ODIN_INSPECTOR
         [ShowIf("canBeSnapped")]
-#endif
         [SerializeField] private LayerMask layerMaskSnap;
 
         // Shader Graph

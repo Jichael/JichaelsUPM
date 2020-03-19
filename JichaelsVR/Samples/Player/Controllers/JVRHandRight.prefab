@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a20f71c596a47447945a5d3ad14343b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JVRController: {fileID: 3048298126949581259}
+  jvrHandController: {fileID: 3048298126949581259}
   activationRadius: 0.01
   layerMask:
     serializedVersion: 2
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f5c64ec4f1f814c93f0f22a2673997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 3048298126949581259}
+  handController: {fileID: 3048298126949581259}
   createModuleOnInit: 0
   initialModule: {fileID: 6161673548260611024, guid: 6d65a0e1649b0574ca122bc117aa1e81,
     type: 3}

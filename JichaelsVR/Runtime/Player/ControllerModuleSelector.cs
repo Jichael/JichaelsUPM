@@ -1,6 +1,4 @@
-﻿#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Jichaels.VRSDK
@@ -12,9 +10,8 @@ namespace Jichaels.VRSDK
 
         [SerializeField] private bool createModuleOnInit;
 
-#if ODIN_INSPECTOR
         [ShowIf("createModuleOnInit"), ValueDropdown("possibleModules")]
-#endif
+
         [SerializeField]
         private VRControllerModule initialModule;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using Jichaels.Localization;
 using UnityEngine;
 namespace Jichaels.VRSDK
 {
@@ -7,6 +8,8 @@ namespace Jichaels.VRSDK
         public static CursorManager Instance { get; private set; }
         
         public bool IsLocked { get; private set; }
+
+        [SerializeField] private GameObject cursorCanvas;       
 
         [SerializeField] private CursorBase defaultCursor;
         [SerializeField] private CursorBase zoomCursor;
@@ -28,6 +31,10 @@ namespace Jichaels.VRSDK
             _currentCursor = defaultCursor;
             _currentCursor.HideHint();
             _currentCursor.ShowCursor();
+            
+            zoomCursor.HideCursor();
+            handCursor.HideCursor();
+            informationCursor.HideCursor();
         }
 
         public void SetCursorPosition(Vector3 position)
@@ -42,6 +49,12 @@ namespace Jichaels.VRSDK
 
         public void SetCursor(CursorInfo cursorInfo)
         {
+            // Only translate once
+            if (cursorInfo.TranslatedHint)
+            {
+                cursorInfo.TranslatedHint = false;
+                cursorInfo.CursorHint = LanguageManager.Instance.RequestValue(cursorInfo.CursorHint);
+            }
             SetCursor(cursorInfo.CursorType, cursorInfo.CursorHint);
         }
 
@@ -79,7 +92,11 @@ namespace Jichaels.VRSDK
             IsLocked = isLocked;
             Cursor.lockState = IsLocked ? CursorLockMode.Locked : CursorLockMode.None; // TODO : in the option menu, chose between confined and none
         }
-        
+
+        public void SetCanvasActive(bool active)
+        {
+            cursorCanvas.SetActive(active);
+        }
 
         private CursorBase CursorTypeToCursor(CursorType cursorType)
         {

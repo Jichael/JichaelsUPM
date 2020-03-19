@@ -6,6 +6,14 @@
             "id": "8ee98cbc-93a2-405b-82fd-6cd7be395b81",
             "actions": [
                 {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "579eea5d-ee19-4cf7-8586-10ea3c7f5104",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "a2a8277d-b33c-4ba7-9582-3a29791ba583",
@@ -156,14 +164,6 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press"
-                },
-                {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "579eea5d-ee19-4cf7-8586-10ea3c7f5104",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [

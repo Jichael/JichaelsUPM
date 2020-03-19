@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Jichaels.Core;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Jichaels.Localization
@@ -18,40 +16,14 @@ namespace Jichaels.Localization
 
         private void Awake()
         {
-            if (LanguageManager.Instance == null || !LanguageManager.Instance.IsReady)
-            {
-                StartCoroutine(DelayCo());
-            }
-            else
-            {
-                SetValue();
-                AddEntry();
-            }
-        }
-
-        private IEnumerator DelayCo()
-        {
-            while (LanguageManager.Instance == null)
-            {
-                yield return Yielders.EndOfFrame;
-            }
-
             AddEntry();
-
-            while (!LanguageManager.Instance.IsReady)
-            {
-                yield return Yielders.EndOfFrame;
-            }
-
             SetValue();
-
         }
 
         private void OnDestroy()
         {
             RemoveEntry();
         }
-
 
         private void AddEntry()
         {

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections;
 using Jichaels.Core;
-#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
-#endif
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
-using UnityEngine.Serialization;
-using UnityEngine.XR.Management;
 using InputDevice = UnityEngine.InputSystem.InputDevice;
 
 namespace Jichaels.VRSDK
@@ -29,10 +25,7 @@ namespace Jichaels.VRSDK
 
         public JVRMouseController MouseController => mouseController;
         [SerializeField] private JVRMouseController mouseController;
-
-        [SerializeField] private InputActionReference inputActionMovement;
-        [SerializeField] private InputActionReference inputActionCameraRotation;
-
+        
         public Transform Transform { get; private set; }
         private CharacterController _characterController;
         private PlayerInput _playerInput;
@@ -58,33 +51,12 @@ namespace Jichaels.VRSDK
         [SerializeField] private bool allowGamepad = true;
         [SerializeField] private bool allowVR = true;
         
-#if ODIN_INSPECTOR
         [Header("VR Constraints"), ShowIf("allowVR")]
-        [ShowIf("allowVR")]
-#else
-        [Header("VR Constraints")]
-#endif
-        [SerializeField] private bool allowVRMovement;
-
-#if ODIN_INSPECTOR
-        [ShowIf("allowVR")]
-#endif
-        [SerializeField] private bool allowVRRotation;
-        
-#if ODIN_INSPECTOR
-        [ShowIf("allowVRRotation")]
-#endif
-        [SerializeField] private bool snapRotation;
-        
-#if ODIN_INSPECTOR
-        [ShowIf("allowVR")]
-#endif
-        [SerializeField] private bool allowVRTeleportation;
-        
-#if ODIN_INSPECTOR
-        [ShowIf("allowVRTeleportation")]
-#endif
-        [SerializeField] private float dashSpeed = 1;
+        [SerializeField, ShowIf("allowVR")] private bool allowVRMovement;
+        [SerializeField, ShowIf("allowVR")] private bool allowVRRotation;
+        [SerializeField, ShowIf("allowVRRotation")] private bool snapRotation;
+        [SerializeField, ShowIf("allowVR")] private bool allowVRTeleportation;
+        [SerializeField, ShowIf("allowVRTeleportation")] private float dashSpeed = 1;
         
         public bool LockMovement { get; set; }
         public bool LockRotation { get; set; }
@@ -94,7 +66,7 @@ namespace Jichaels.VRSDK
         private void Awake()
         {
             
-            // TODO
+            // TODO : not working atm on the unity package
             /*
              * Get a reference to OculusLoader (or ideally, any loader that is active)
              *
@@ -179,7 +151,7 @@ namespace Jichaels.VRSDK
 
             if (!allowVRMovement && CurrentControlScheme == CustomControlScheme.VR) return;
 
-            _inputMovement = inputActionMovement.action.ReadValue<Vector2>();
+            _inputMovement = InputsManager.Instance.Movement;
 
             if (IsClimbing)
             {
@@ -226,7 +198,7 @@ namespace Jichaels.VRSDK
 
             if (!allowVRRotation && CurrentControlScheme == CustomControlScheme.VR) return;
 
-            _inputRotation = inputActionCameraRotation.action.ReadValue<Vector2>();
+            _inputRotation = InputsManager.Instance.Rotation;
 
             if (CurrentControlScheme == CustomControlScheme.VR)
             {
@@ -486,6 +458,7 @@ namespace Jichaels.VRSDK
 
         private void SetVRState(bool vr)
         {
+            CursorManager.Instance.SetCanvasActive(!vr);
             OnToggleVR?.Invoke(vr);
         }
 
@@ -522,7 +495,7 @@ namespace Jichaels.VRSDK
             {
                 if (allowVR)
                 {
-                    _playerInput.SwitchCurrentControlScheme("VR");
+                    _playerInput.SwitchCurrentControlScheme(VRScheme);
                     HeadSet.SetTrackingSpace(_characterController.height);
                 }
             }

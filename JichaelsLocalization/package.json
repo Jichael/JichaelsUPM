@@ -6,7 +6,6 @@
   "unity": "2019.3",
   "dependencies": {
     "com.unity.textmeshpro": "3.0.0-preview.7",
-    "com.jichaels.core": "1.0.0",
     "com.unity.nuget.newtonsoft-json": "1.1.2"
   },
   "author": {

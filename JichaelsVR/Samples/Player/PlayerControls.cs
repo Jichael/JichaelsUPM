@@ -19,6 +19,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""8ee98cbc-93a2-405b-82fd-6cd7be395b81"",
             ""actions"": [
                 {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""579eea5d-ee19-4cf7-8586-10ea3c7f5104"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""a2a8277d-b33c-4ba7-9582-3a29791ba583"",
@@ -169,14 +177,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Press""
-                },
-                {
-                    ""name"": ""MousePosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""579eea5d-ee19-4cf7-8586-10ea3c7f5104"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -651,6 +651,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
 }");
         // JVRPlayer
         m_JVRPlayer = asset.FindActionMap("JVRPlayer", throwIfNotFound: true);
+        m_JVRPlayer_MousePosition = m_JVRPlayer.FindAction("MousePosition", throwIfNotFound: true);
         m_JVRPlayer_Movement = m_JVRPlayer.FindAction("Movement", throwIfNotFound: true);
         m_JVRPlayer_CameraRotation = m_JVRPlayer.FindAction("CameraRotation", throwIfNotFound: true);
         m_JVRPlayer_LeftControllerTrigger = m_JVRPlayer.FindAction("LeftControllerTrigger", throwIfNotFound: true);
@@ -670,7 +671,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_JVRPlayer_Sprint = m_JVRPlayer.FindAction("Sprint", throwIfNotFound: true);
         m_JVRPlayer_ResetTrackingSpace = m_JVRPlayer.FindAction("ResetTrackingSpace", throwIfNotFound: true);
         m_JVRPlayer_OpenModuleSelector = m_JVRPlayer.FindAction("OpenModuleSelector", throwIfNotFound: true);
-        m_JVRPlayer_MousePosition = m_JVRPlayer.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -720,6 +720,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // JVRPlayer
     private readonly InputActionMap m_JVRPlayer;
     private IJVRPlayerActions m_JVRPlayerActionsCallbackInterface;
+    private readonly InputAction m_JVRPlayer_MousePosition;
     private readonly InputAction m_JVRPlayer_Movement;
     private readonly InputAction m_JVRPlayer_CameraRotation;
     private readonly InputAction m_JVRPlayer_LeftControllerTrigger;
@@ -739,11 +740,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_JVRPlayer_Sprint;
     private readonly InputAction m_JVRPlayer_ResetTrackingSpace;
     private readonly InputAction m_JVRPlayer_OpenModuleSelector;
-    private readonly InputAction m_JVRPlayer_MousePosition;
     public struct JVRPlayerActions
     {
         private @PlayerControls m_Wrapper;
         public JVRPlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MousePosition => m_Wrapper.m_JVRPlayer_MousePosition;
         public InputAction @Movement => m_Wrapper.m_JVRPlayer_Movement;
         public InputAction @CameraRotation => m_Wrapper.m_JVRPlayer_CameraRotation;
         public InputAction @LeftControllerTrigger => m_Wrapper.m_JVRPlayer_LeftControllerTrigger;
@@ -763,7 +764,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Sprint => m_Wrapper.m_JVRPlayer_Sprint;
         public InputAction @ResetTrackingSpace => m_Wrapper.m_JVRPlayer_ResetTrackingSpace;
         public InputAction @OpenModuleSelector => m_Wrapper.m_JVRPlayer_OpenModuleSelector;
-        public InputAction @MousePosition => m_Wrapper.m_JVRPlayer_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_JVRPlayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -773,6 +773,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_JVRPlayerActionsCallbackInterface != null)
             {
+                @MousePosition.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
                 @Movement.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMovement;
@@ -830,13 +833,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenModuleSelector.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
                 @OpenModuleSelector.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
                 @OpenModuleSelector.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnOpenModuleSelector;
-                @MousePosition.started -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_JVRPlayerActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_JVRPlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
@@ -894,9 +897,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenModuleSelector.started += instance.OnOpenModuleSelector;
                 @OpenModuleSelector.performed += instance.OnOpenModuleSelector;
                 @OpenModuleSelector.canceled += instance.OnOpenModuleSelector;
-                @MousePosition.started += instance.OnMousePosition;
-                @MousePosition.performed += instance.OnMousePosition;
-                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
@@ -930,6 +930,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface IJVRPlayerActions
     {
+        void OnMousePosition(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
         void OnLeftControllerTrigger(InputAction.CallbackContext context);
@@ -949,6 +950,5 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnResetTrackingSpace(InputAction.CallbackContext context);
         void OnOpenModuleSelector(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

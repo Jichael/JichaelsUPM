@@ -7,8 +7,6 @@ namespace Jichaels.VRSDK
     public class JVRMouseController : MonoBehaviour, IInteractionController
     {
         public JVRPlayer Player { get; private set; }
-        
-        [SerializeField] private InputActionReference mousePositionAction;
 
         [SerializeField] private LayerMask layerMask;
 
@@ -41,7 +39,7 @@ namespace Jichaels.VRSDK
 
         public void UpdateController()
         {
-            _mousePosition = mousePositionAction.action.ReadValue<Vector2>();
+            _mousePosition = InputsManager.Instance.MousePosition;
             
             _ray = Player.HeadSet.Camera.ScreenPointToRay(_mousePosition);
             if (Physics.Raycast(_ray, out _hit, Rules.MouseActionMaxDistance, layerMask))
@@ -84,8 +82,6 @@ namespace Jichaels.VRSDK
                 }
                 _isHovering = false;
             }
-
-            CursorManager.Instance.SetCursorPosition(_mousePosition);
         }
 
         public void PrimaryAction()

@@ -54,6 +54,7 @@ namespace Jichaels.VRSDK
         public void HideCursor()
         {
             gameObject.SetActive(false);
+            HideHint();
         }
 
         public void ShowHint(string text)

@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f5c64ec4f1f814c93f0f22a2673997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1888390910329026206}
+  handController: {fileID: 1888390910329026206}
   createModuleOnInit: 0
   initialModule: {fileID: 6161673548260611024, guid: 6d65a0e1649b0574ca122bc117aa1e81,
     type: 3}
