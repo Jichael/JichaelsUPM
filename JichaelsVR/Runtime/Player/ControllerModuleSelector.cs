@@ -12,8 +12,7 @@ namespace Jichaels.VRSDK
 
         [ShowIf("createModuleOnInit"), ValueDropdown("possibleModules")]
 
-        [SerializeField]
-        private VRControllerModule initialModule;
+        [SerializeField] private VRControllerModule initialModule;
 
         [SerializeField] private VRControllerModule[] possibleModules;
 
