@@ -621,9 +621,10 @@ MonoBehaviour:
   springEffectMultiplier: 0.5
   clickDelay: 0.2
   cursorInfo:
-    CursorType: 2
-    CursorHint: Push
-    TranslatedHint: 0
+    cursorType: 2
+    cursorHintSimple: Simple
+    cursorHintDetailed: Detailed
+    needTranslation: 0
 --- !u!4 &526421708
 Transform:
   m_ObjectHideFlags: 0
@@ -2097,9 +2098,10 @@ MonoBehaviour:
   springEffectMultiplier: 0.5
   clickDelay: 0.2
   cursorInfo:
-    CursorType: 2
-    CursorHint: Danger
-    TranslatedHint: 0
+    cursorType: 2
+    cursorHintSimple: Simple2
+    cursorHintDetailed: Detailed2
+    needTranslation: 0
 --- !u!1 &2104097121
 GameObject:
   m_ObjectHideFlags: 0

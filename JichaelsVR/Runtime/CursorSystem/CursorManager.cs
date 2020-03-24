@@ -16,7 +16,9 @@ namespace Jichaels.VRSDK
         [SerializeField] private CursorBase handCursor;
         [SerializeField] private CursorBase informationCursor;
 
-        public bool ShowHint { get; set; } = true;
+        public CursorHintLevel hintLevel;
+
+        [SerializeField] private CursorInfo defaultCursorInfo;        
 
         private CursorBase _currentCursor;
 
@@ -28,10 +30,7 @@ namespace Jichaels.VRSDK
             SetLockState(false);
             IsLocked = Cursor.lockState == CursorLockMode.Locked;
 
-            _currentCursor = defaultCursor;
-            _currentCursor.HideHint();
-            _currentCursor.ShowCursor();
-            
+            SetCursorNoHide(defaultCursorInfo);
             zoomCursor.HideCursor();
             handCursor.HideCursor();
             informationCursor.HideCursor();
@@ -49,40 +48,30 @@ namespace Jichaels.VRSDK
 
         public void SetCursor(CursorInfo cursorInfo)
         {
-            // Only translate once
-            if (cursorInfo.TranslatedHint)
-            {
-                cursorInfo.TranslatedHint = false;
-                cursorInfo.CursorHint = LanguageManager.Instance.RequestValue(cursorInfo.CursorHint);
-            }
-            SetCursor(cursorInfo.CursorType, cursorInfo.CursorHint);
+            _currentCursor.HideCursor();
+           SetCursorNoHide(cursorInfo);
         }
 
-        private void SetCursor(CursorType cursorType, string cursorHint)
+        private void SetCursorNoHide(CursorInfo cursorInfo)
         {
-            _currentCursor.HideCursor();
-            _currentCursor = CursorTypeToCursor(cursorType);
-            if (string.IsNullOrEmpty(cursorHint))
+            _currentCursor = CursorTypeToCursor(cursorInfo.cursorType);
+            string hint = cursorInfo.GetHint(hintLevel);
+            
+            if (string.IsNullOrEmpty(hint))
             {
                 _currentCursor.HideHint();
             }
             else
             {
-                if (ShowHint)
-                {
-                    _currentCursor.ShowHint(cursorHint);
-                }
-                else
-                {
-                    _currentCursor.HideHint();
-                }
+                _currentCursor.ShowHint(hint);
             }
+            
             _currentCursor.ShowCursor();
         }
-
+        
         public void ResetDefaultCursor()
         {
-            SetCursor(CursorType.Default, null);
+            SetCursor(defaultCursorInfo);
         }
 
         public void SetLockState(bool isLocked)
@@ -122,14 +111,45 @@ namespace Jichaels.VRSDK
         Default,
         Zoom,
         Hand,
-        Information // TODO : more cursor
+        Information // TODO : more cursor ?
+    }
+
+    public enum CursorHintLevel
+    {
+        None,
+        Simple,
+        Detailed
     }
 
     [Serializable]
     public class CursorInfo
     {
-        public CursorType CursorType;
-        public string CursorHint;
-        public bool TranslatedHint;
+        public CursorType cursorType;
+        [SerializeField] private string cursorHintSimple;
+        [SerializeField] private string cursorHintDetailed;
+        [SerializeField] private bool needTranslation;
+
+        public string GetHint(CursorHintLevel hintLevel)
+        {
+            if(needTranslation) TranslateHints();
+            switch (hintLevel)
+            {
+                case CursorHintLevel.None:
+                    return string.Empty;
+                case CursorHintLevel.Simple:
+                    return cursorHintSimple;
+                case CursorHintLevel.Detailed:
+                    return cursorHintDetailed;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(hintLevel), hintLevel, null);
+            }
+        }
+        
+        private void TranslateHints()
+        {
+            needTranslation = false;
+            cursorHintSimple = LanguageManager.Instance.RequestValue(cursorHintSimple);
+            cursorHintDetailed = LanguageManager.Instance.RequestValue(cursorHintDetailed);
+        }
     }
 }
