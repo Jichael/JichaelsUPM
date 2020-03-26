@@ -80,9 +80,7 @@ namespace Jichaels.VRSDK
 
             _grabbingHandController = null;
         }
-        
-        
-        
+
         #region HandInteract
 
         public bool DisableInteraction { get; set; }

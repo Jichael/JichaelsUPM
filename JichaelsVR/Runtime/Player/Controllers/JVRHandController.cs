@@ -22,8 +22,12 @@ namespace Jichaels.VRSDK
         public bool IsGrabbing { get; private set; }
         public IJVRHandInteract Grabbed { get; private set; }
 
+        public JVRRiggedHand riggedHand;
+        
+        // TODO : remove this and use new rigged hand system
         [SerializeField] private GameObject handModel;
         private Renderer _handModelRenderer;
+        [SerializeField] private Animator handModelAnimator;
 
         [Header("Physic calculation")]
         [SerializeField] private float raycastRadius;
@@ -36,7 +40,6 @@ namespace Jichaels.VRSDK
         private readonly Color _handColor = Color.green;
         private bool _showHandModel = true;
 
-        [SerializeField] private Animator handModelAnimator;
 
         private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
         private static readonly int Flex = Animator.StringToHash("Flex");
