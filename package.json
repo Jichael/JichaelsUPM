@@ -1,0 +1,21 @@
+{
+  "name": "com.jichaels.statemachine",
+  "version": "1.0.0",
+  "displayName": "Jichaels StateMachine",
+  "description": "State machine system that allows you to create states, transitions and events that will be linked to your game.",
+  "unity": "2019.3",
+  "author": {
+    "name": "Jichaels",
+    "email": "Jichael38@hotmail.fr"
+  },
+  "samples": [
+    {
+      "displayName": "Quest example",
+      "description": "Small example for setting up a quest",
+      "path": "Samples~/QuestExample"
+    }
+  ],
+  "dependencies": {
+    "com.jichaels.core": "1.0.0"
+  }
+}
