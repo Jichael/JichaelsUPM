@@ -1,3 +1,8 @@
+# NOT USED ANYMORE : for archiving purpose ONLY. Each package is in its own git repo now
+
+
+
+
 # JichaelsUPM
 
 This is a set of Unity packages that you can install using UPM.
