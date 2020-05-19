@@ -1,0 +1,22 @@
+{
+  "name": "com.jichaels.tools2d",
+  "version": "1.0.0",
+  "displayName": "Jichaels 2D Tools",
+  "description": "Tools for 2D : Helpers, polygon clipping, segment maths...",
+  "unity": "2019.3",
+  "author": {
+    "name": "Jichaels",
+    "email": "Jichael38@hotmail.fr"
+  },
+  "dependencies": {
+    "com.jichaels.core": "1.0.0",
+    "com.unity.textmeshpro": "3.0.0-preview.7"
+  },
+  "sample": [
+    {
+      "displayName": "Polygon helpers and clipping",
+      "description": "Simple scene to show polygon visualizers, clipping (intersection, union...) of polygons",
+      "path": "Samples~/PolygonExample"
+    }
+  ]
+}
